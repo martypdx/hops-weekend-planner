@@ -7,4 +7,8 @@ MVP:
  - Deployed to Heroku with TravisCI
 
  STRETCH GOALS:
- -
+ - Integrate Yelp/OCB API
+ - Integrate Uber/Lyft to take you to brewery
+ - Integrate Twitter to give you updates on favorites
+ - FRONT END: gives you clean weekend itenerary 
+ - FRONT END: user votes make photos bigger
