@@ -5,7 +5,7 @@ const connection = require('mongoose').connection;
 
 //export a small helper for dropping DB
 module.exports = {
-  drop() {
-    return connection.dropDatabase();
-  }
+    drop() {
+        return connection.dropDatabase();
+    }
 };
