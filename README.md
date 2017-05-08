@@ -259,4 +259,95 @@ DANCEABILITY
 ```
 https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&min_danceability=0.8&market=US
 
+
+{
+  "tracks" : [ {
+    "album" : {
+      "album_type" : "ALBUM",
+      "artists" : [ {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/4NHQUGzhtTLFvgF5SZesLK"
+        },
+        "href" : "https://api.spotify.com/v1/artists/4NHQUGzhtTLFvgF5SZesLK",
+        "id" : "4NHQUGzhtTLFvgF5SZesLK",
+        "name" : "Tove Lo",
+        "type" : "artist",
+        "uri" : "spotify:artist:4NHQUGzhtTLFvgF5SZesLK"
+      } ],
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/1tuekzsMZQOuiMejKP6t2Y"
+      },
+      "href" : "https://api.spotify.com/v1/albums/1tuekzsMZQOuiMejKP6t2Y",
+      "id" : "1tuekzsMZQOuiMejKP6t2Y",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/46cadf3fab5d422211c19207beca72b823120c00",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/34306a13b7dcaeea8d064bc2710d0c27f355982e",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/423613b1ab4ebd855bfe61bc2c7a7c398647bb9a",
+        "width" : 64
+      } ],
+      "name" : "Lady Wood",
+      "type" : "album",
+      "uri" : "spotify:album:1tuekzsMZQOuiMejKP6t2Y"
+    },
+    "artists" : [ {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/4NHQUGzhtTLFvgF5SZesLK"
+      },
+      "href" : "https://api.spotify.com/v1/artists/4NHQUGzhtTLFvgF5SZesLK",
+      "id" : "4NHQUGzhtTLFvgF5SZesLK",
+      "name" : "Tove Lo",
+      "type" : "artist",
+      "uri" : "spotify:artist:4NHQUGzhtTLFvgF5SZesLK"
+    } ],
+    "disc_number" : 1,
+    "duration_ms" : 231025,
+    "explicit" : true,
+    "external_ids" : {
+      "isrc" : "SEUM71601203"
+    },
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/track/4vIClNt19EynTBe133jer3"
+    },
+    "href" : "https://api.spotify.com/v1/tracks/4vIClNt19EynTBe133jer3",
+    "id" : "4vIClNt19EynTBe133jer3",
+    "is_playable" : true,
+    "linked_from" : {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/track/1gFwPpN5n2oG0Sha0kYiaq"
+      },
+      "href" : "https://api.spotify.com/v1/tracks/1gFwPpN5n2oG0Sha0kYiaq",
+      "id" : "1gFwPpN5n2oG0Sha0kYiaq",
+      "type" : "track",
+      "uri" : "spotify:track:1gFwPpN5n2oG0Sha0kYiaq"
+    },
+    "name" : "Keep It Simple",
+    "popularity" : 51,
+    "preview_url" : "https://p.scdn.co/mp3-preview/62859ec5f21addb460d92dc942651d49e085a42d?cid=5a849416a63c44c1a4450c4bcdf2b527",
+    "track_number" : 10,
+    "type" : "track",
+    "uri" : "spotify:track:4vIClNt19EynTBe133jer3"
+  } ],
+  "seeds" : [ {
+    "initialPoolSize" : 250,
+    "afterFilteringSize" : 227,
+    "afterRelinkingSize" : 227,
+    "id" : "4NHQUGzhtTLFvgF5SZesLK",
+    "type" : "ARTIST",
+    "href" : "https://api.spotify.com/v1/artists/4NHQUGzhtTLFvgF5SZesLK"
+  }, {
+    "initialPoolSize" : 250,
+    "afterFilteringSize" : 89,
+    "afterRelinkingSize" : 83,
+    "id" : "0c6xIDDpzE81m2q797ordA",
+    "type" : "TRACK",
+    "href" : "https://api.spotify.com/v1/tracks/0c6xIDDpzE81m2q797ordA"
+  } ]
+}
 ```
