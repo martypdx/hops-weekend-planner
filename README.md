@@ -171,3 +171,80 @@ https://api.spotify.com/v1/users/126171140/playlists/3AEDUXjNVitkRque3w1ObS/trac
   "total" : 17
 }
 ```
+/GET user top track:
+When retrieving the token, set `user-top-read` within the scope in app.js. Both artists and tracks can be retrieved this way.
+```
+https://api.spotify.com/v1/me/top/tracks?limit=1
+
+{
+  "items" : [ {
+    "album" : {
+      "album_type" : "ALBUM",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/0WtCqmpVN7rRGfDMSWSXBA"
+      },
+      "href" : "https://api.spotify.com/v1/albums/0WtCqmpVN7rRGfDMSWSXBA",
+      "id" : "0WtCqmpVN7rRGfDMSWSXBA",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/72d0fb955bd92e5fd2866a556d72a8e2f16fcec2",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/151a95335af82cf47211165b4f4908cfda27ee3c",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/ddcd0c357723f6441cbeae07181fa7dee0a7e63e",
+        "width" : 64
+      } ],
+      "name" : "Kill The Lights (Deluxe)",
+      "type" : "album",
+      "uri" : "spotify:album:0WtCqmpVN7rRGfDMSWSXBA"
+    },
+    "artists" : [ {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0BvkDsjIUla7X0k6CSWh1I"
+      },
+      "href" : "https://api.spotify.com/v1/artists/0BvkDsjIUla7X0k6CSWh1I",
+      "id" : "0BvkDsjIUla7X0k6CSWh1I",
+      "name" : "Luke Bryan",
+      "type" : "artist",
+      "uri" : "spotify:artist:0BvkDsjIUla7X0k6CSWh1I"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/3RXtieA0L2l22SWlOUMNca"
+      },
+      "href" : "https://api.spotify.com/v1/artists/3RXtieA0L2l22SWlOUMNca",
+      "id" : "3RXtieA0L2l22SWlOUMNca",
+      "name" : "Karen Fairchild",
+      "type" : "artist",
+      "uri" : "spotify:artist:3RXtieA0L2l22SWlOUMNca"
+    } ],
+    "disc_number" : 1,
+    "duration_ms" : 190773,
+    "explicit" : false,
+    "external_ids" : {
+      "isrc" : "USUM71508384"
+    },
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/track/0RE8WWlaCQM6M4XHUK3u7b"
+    },
+    "href" : "https://api.spotify.com/v1/tracks/0RE8WWlaCQM6M4XHUK3u7b",
+    "id" : "0RE8WWlaCQM6M4XHUK3u7b",
+    "is_playable" : true,
+    "name" : "Home Alone Tonight",
+    "popularity" : 67,
+    "preview_url" : "https://p.scdn.co/mp3-preview/f5d0a4e4377d9014e27a2c8692151e37414d5b57",
+    "track_number" : 4,
+    "type" : "track",
+    "uri" : "spotify:track:0RE8WWlaCQM6M4XHUK3u7b"
+  } ],
+  "total" : 50,
+  "limit" : 1,
+  "offset" : 0,
+  "href" : "https://api.spotify.com/v1/me/top/tracks?limit=1&offset=0",
+  "previous" : null,
+  "next" : "https://api.spotify.com/v1/me/top/tracks?limit=1&offset=1"
+}
+```
