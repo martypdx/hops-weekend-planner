@@ -1,14 +1,10 @@
-# Hops: Brewery DB and Weekend Planner
+# Hops: Music Community Database
 
 MVP:
- - Models for breweries, brews, and users
- - 5 breweries, with all data entered
- - 2 users (Harold and Kumar)
+ - Models for users, songs, artists and (stretch) shows
+ - 5 artists with 5 tracks each, with all data entered
+ - 4 users with different user personas
  - Deployed to Heroku with TravisCI
 
  STRETCH GOALS:
- - Integrate Yelp/OCB API
- - Integrate Uber/Lyft to take you to brewery
- - Integrate Twitter to give you updates on favorites
- - FRONT END: gives you clean weekend itenerary 
- - FRONT END: user votes make photos bigger
+ - Integrate Songkick or BandsInTown to add shows
