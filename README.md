@@ -10,3 +10,12 @@ MVP:
 
  STRETCH GOALS:
  - Integrate Songkick or BandsInTown to add shows
+
+### Sample Route Responses
+
+/GET Playlist:
+
+/GET User
+
+
+
