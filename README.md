@@ -248,3 +248,15 @@ https://api.spotify.com/v1/me/top/tracks?limit=1
   "next" : "https://api.spotify.com/v1/me/top/tracks?limit=1&offset=1"
 }
 ```
+GET/ recently played
+When retrieving the token, set `user-read-recently-played` within the scope in app.js.
+
+```
+```
+
+GET/ seed recommendations
+DANCEABILITY
+```
+https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&min_danceability=0.8&market=US
+
+```
