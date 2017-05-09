@@ -18,19 +18,19 @@ describe('songs api', () => {
     let fakeSong1 = {
         title: 'Halo',
         artist: 'Beyonce',
-        swipeLeft: false,
+        // swipeLeft: false,
         spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O'
     };
     let fakeSong2 = {
         title: 'Lame Song',
         artist: 'Train',
-        swipeLeft: true,
+        // swipeLeft: true,
         spotifyId: '5DGJC3n9DS0Y9eY5ul9y05'
     };
     let fakeSong3 = {
         title: 'List',
         artist: 'Kenrick Lamar',
-        swipeLeft: false,
+        // swipeLeft: false,
         spotifyId: '5DGJC3n9DS0Y9eY7ul9y0O'
     };
 
@@ -82,12 +82,14 @@ describe('songs api', () => {
                 assert.equal(songs.length, 3);
                 function test(fakeSong) {
                     console.log('******songs', songs);
+                    console.log('****fakesong', fakeSong);
                     assert.include(songs, {
                         title: fakeSong.title,
                         artist: fakeSong.artist,
                         _id: fakeSong._id,
                         spotifyId: fakeSong.spotifyId,
-                        swipeLeft: fakeSong.swipeLeft,
+                        // swipeLeft: fakeSong.swipeLeft,
+                        genre: fakeSong.genre,
                     });
                 }
 
@@ -105,6 +107,35 @@ describe('songs api', () => {
             .then(updated => {
                 assert.equal(updated.title, 'updated fake song');
             });
+    });
+
+    it('deletes a song', () => {
+        return request.delete(`/songs/${fakeSong3._id}`)
+            .then(res => res.body)
+            .then(result => {
+                assert.isTrue(result.removed);
+            })
+            .then(() => request.get('/songs'))
+            .then(res => res.body)
+            .then(songs => {
+                assert.equal(songs.length, 2);
+            });
+    });
+
+    it('deletes a non-existent song, returns removed false', () => {
+        return request.delete(`/songs/${fakeSong3._id}`)
+            .then(res => res.body)
+            .then(result => {
+                assert.isFalse(result.removed);
+            });
+    });
+
+    it('errors on validation falure', () => {
+        return saveSong({})
+            .then(
+            () => { throw new Error('expected failure'); },
+            () => { }
+            );
     });
 
 });
