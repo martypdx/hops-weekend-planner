@@ -1,5 +1,5 @@
-const db = require('./_db');
-const request = require('./_request');
+const db = require('./util/_db');
+const request = require('./util/_request');
 const assert = require('chai').assert;
 
 describe('hops api', () => {
@@ -15,29 +15,22 @@ describe('hops api', () => {
             });
     });
 
-    let fakeUser1 = {
-        name: 'fake',
-        email: 'fakeUser1@fake.com',
-        password: 'fakePassword',
+    let keeley = {
+        name: 'Keeley',
+        email: 'keeleyhammond@me.com',
+        password: 'hunter2',
+        spotifyId: 'vertedinde',
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock']
-
     };
-    // let fakeUser2 = {
-    //     name: 'fake2',
-    //     email: 'fakeUser2@fake.com',
-    //     password: 'fakePassword',
-    //     friends: ['fakeUser1'],
-    //     faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
-    // };
 
-    // let fakeUser3 = {
-    //     name: 'fake3',
-    //     email: 'fakeUser3@fake.com',
-    //     password: 'fakePassword',
-    //     friends: ['ivy', 'chris'],
-    //     faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
-    // };
+    let mississippiStudios = {
+        name: 'Mississippi Studios',
+        email: 'fakeUser2@fake.com',
+        password: 'fakePassword',
+        friends: [],
+        faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
+    };
 
     function saveUser(user) {
         return request
@@ -47,21 +40,35 @@ describe('hops api', () => {
     }
 
     it('roundtrips a new user', () => {
-        return saveUser(fakeUser1)
+        return saveUser(keeley)
             .then(savedUser => {
                 assert.ok(savedUser._id, 'saved has id');
-                fakeUser1 = savedUser;
+                keeley = savedUser;
             })
             .then(() => {
-                return request.get(`/users/${fakeUser1._id}`);
+                return request.get(`/users/${keeley._id}`);
             })
             .then(res => res.body)
             .then(gotUser => {
-                assert.deepEqual(gotUser, fakeUser1);
+                assert.deepEqual(gotUser, keeley);
             });
     });
 
-    it.skip('saves another user as a friend', () => {});
-
+    it('saves another user as a friend', () => {
+        return saveUser(mississippiStudios)
+            .then(savedUser => {
+                assert.ok(savedUser._id, 'saved has id');
+                mississippiStudios = savedUser;
+                keeley.friends.push(mississippiStudios._id);
+            })
+            .then(() => {
+                return request.put(`/users/${keeley._id}`)
+                    .send(keeley)
+                    .then(res => res.body)
+                    .then(user => {
+                        assert.deepEqual(user, keeley);
+                    });
+            });
+    });
 
 });
