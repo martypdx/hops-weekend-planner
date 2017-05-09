@@ -46,19 +46,19 @@ describe('hops api', () => {
             .then(res => res.body);
     }
 
-    it('rountrips a new user', () => {
+    it('roundtrips a new user', () => {
         return saveUser(fakeUser1)
             .then(savedUser => {
                 assert.ok(savedUser._id, 'saved has id');
                 fakeUser1 = savedUser;
+            })
+            .then(() => {
+                return request.get(`/users/${fakeUser1._id}`);
+            })
+            .then(res => res.body)
+            .then(gotUser => {
+                assert.deepEqual(gotUser, fakeUser1);
             });
-            // .then(() => {
-            //     return request.get(`/users/${fakeUser1._id}`);
-            // })
-            // .then(res => res.body)
-            // .then(gotUser => {
-            //     assert.deepEqual(gotUser, fakeUser1);
-            // });
     });
 
 
