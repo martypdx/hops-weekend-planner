@@ -18,19 +18,16 @@ describe('songs api', () => {
     let fakeSong1 = {
         title: 'Halo',
         artist: 'Beyonce',
-        // swipeLeft: false,
         spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O'
     };
     let fakeSong2 = {
         title: 'Lame Song',
         artist: 'Train',
-        // swipeLeft: true,
         spotifyId: '5DGJC3n9DS0Y9eY5ul9y05'
     };
     let fakeSong3 = {
         title: 'List',
         artist: 'Kenrick Lamar',
-        // swipeLeft: false,
         spotifyId: '5DGJC3n9DS0Y9eY7ul9y0O'
     };
 
@@ -81,14 +78,11 @@ describe('songs api', () => {
             .then(songs => {
                 assert.equal(songs.length, 3);
                 function test(fakeSong) {
-                    console.log('******songs', songs);
-                    console.log('****fakesong', fakeSong);
                     assert.include(songs, {
                         title: fakeSong.title,
                         artist: fakeSong.artist,
                         _id: fakeSong._id,
                         spotifyId: fakeSong.spotifyId,
-                        // swipeLeft: fakeSong.swipeLeft,
                         genre: fakeSong.genre,
                     });
                 }
