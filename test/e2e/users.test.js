@@ -29,7 +29,7 @@ describe('hops api', () => {
         email: 'fakeUser2@fake.com',
         password: 'fakePassword',
         friends: [],
-        faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
+        faveGenre: ['opera', 'afrobeat', 'alt-rock'],
     };
 
     function saveUser(user) {
@@ -54,6 +54,17 @@ describe('hops api', () => {
             });
     });
 
+    it('GET returns 404 for non-existent id', () => {
+        const fakeId = '5201103b8896909da4402997';
+        return request.get(`/users/${fakeId}`)
+            .then(
+            () => { throw new Error('expected 404'); },
+            res => {
+                assert.equal(res.status, 404);
+            }
+            );
+    });
+
     it('saves another user as a friend', () => {
         return saveUser(mississippiStudios)
             .then(savedUser => {
@@ -70,5 +81,8 @@ describe('hops api', () => {
                     });
             });
     });
+
+
+
 
 });
