@@ -156,7 +156,15 @@ describe.only('User Management Api', () => {
             });
     });
 
-
+    it('updates users', () => {
+        keeley.name = 'Oprah';
+        return request.put(`/users/${keeley._id}`)
+            .send(keeley)
+            .then(res => res.body)
+            .then(updated => {
+                assert.equal(updated.name, 'Oprah');
+            });
+    });
 
 
 });
