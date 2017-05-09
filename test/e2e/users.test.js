@@ -61,5 +61,7 @@ describe('hops api', () => {
             });
     });
 
+    it.skip('saves another user as a friend', () => {});
+
 
 });
