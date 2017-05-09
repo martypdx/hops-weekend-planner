@@ -32,6 +32,15 @@ describe('hops api', () => {
         faveGenre: ['opera', 'afrobeat', 'alt-rock'],
     };
 
+    let Ivy = {
+        name: 'Ivy',
+        email: 'ivy@fake.com',
+        password: 'fakePassword',
+        friends: [],
+        faveGenre: ['opera', 'afrobeat', 'alt-rock'],
+    };
+
+
     function saveUser(user) {
         return request
             .post('/users')
@@ -79,6 +88,32 @@ describe('hops api', () => {
                     .then(user => {
                         assert.deepEqual(user, keeley);
                     });
+            });
+
+    });
+
+    it('returns list of all users', () => {
+        return saveUser(Ivy)
+            .then(savedUser => {
+                Ivy = savedUser[0];
+            })
+            .then(() => request.get('/users'))
+            .then(res => res.body)
+            .then(users => {
+                assert.equal(users.length, 3);
+                function test(fakeUser) {
+                    assert.include(users, {
+                        name: fakeUser.name,
+                        artist: fakeUser.artist,
+                        _id: fakeUser._id,
+                        spotifyId: fakeUser.spotifyId,
+                        genre: fakeUser.genre,
+                    });
+                }
+
+                test(keeley);
+                test(mississippiStudios);
+                test(Ivy);
             });
     });
 
