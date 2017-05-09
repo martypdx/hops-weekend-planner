@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe.only('User Management Api', () => {
+describe('User Management Api', () => {
 
     before(db.drop);
 
@@ -164,6 +164,43 @@ describe.only('User Management Api', () => {
             .then(updated => {
                 assert.equal(updated.name, 'Oprah');
             });
+    });
+
+    it('User and Song object relationship', () => {
+        return request.patch(`/users/${keeley._id}`)
+            .then(res => res.body)
+            .then(result => {
+                assert.isTrue(result.removed);
+            });
+    });
+
+    it('deletes a user', () => {
+        return request.delete(`/users/${keeley._id}`)
+            .then(res => res.body)
+            .then(result => {
+                assert.isTrue(result.removed);
+            })
+            .then(() => request.get('/users'))
+            .then(res => res.body)
+            .then(songs => {
+                assert.equal(songs.length, 3);
+            });
+    });
+
+    it('deletes a non-existent user, returns removed false', () => {
+        return request.delete(`/users/${keeley._id}`)
+            .then(res => res.body)
+            .then(result => {
+                assert.isFalse(result.removed);
+            });
+    });
+
+    it('errors on validation falure', () => {
+        return saveUser({})
+            .then(
+            () => { throw new Error('expected failure'); },
+            () => { }
+            );
     });
 
 
