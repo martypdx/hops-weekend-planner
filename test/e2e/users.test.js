@@ -19,7 +19,10 @@ describe.only('User Management Api', () => {
         name: 'Keeley',
         email: 'keeleyhammond@me.com',
         password: 'hunter2',
-        spotifyId: 'vertedinde',
+        spotify: {
+            spotify_id: 'vertedinde',
+            access_token: ''
+        },
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock']
     };
@@ -27,7 +30,10 @@ describe.only('User Management Api', () => {
     let mississippiStudios = {
         name: 'Mississippi Studios',
         email: 'fakeUser3@fake.com',
-        spotifyId: 'mississippistudios',
+        spotify: {
+            spotify_id: 'mississippipstudios',
+            access_token: ''
+        },
         password: 'fakePassword',
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
@@ -37,7 +43,10 @@ describe.only('User Management Api', () => {
         name: 'Colin Hammond',
         email: 'fakeUser3@fake.com',
         password: 'fakePassword',
-        spotifyId: 'colssoccer12',
+        spotify: {
+            spotify_id: 'colssoccer12',
+            access_token: ''
+        },
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
     };
