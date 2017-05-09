@@ -21,7 +21,8 @@ describe.only('User Management Api', () => {
         password: 'hunter2',
         spotify: {
             spotify_id: 'vertedinde',
-            access_token: ''
+            access_token: '',
+            refresh_token: ''
         },
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock']
@@ -30,11 +31,12 @@ describe.only('User Management Api', () => {
     let mississippiStudios = {
         name: 'Mississippi Studios',
         email: 'fakeUser3@fake.com',
+        password: 'fakePassword',
         spotify: {
             spotify_id: 'mississippipstudios',
-            access_token: ''
+            access_token: '',
+            refresh_token: ''
         },
-        password: 'fakePassword',
         friends: [],
         faveGenre: ['opera', 'afrobeat', 'alt-rock'],
     };
@@ -44,6 +46,11 @@ describe.only('User Management Api', () => {
         name: 'Ivy',
         email: 'ivy@fake.com',
         password: 'fakePassword',
+        spotify: {
+            spotify_id: 'colssoccer12',
+            access_token: '',
+            refresh_token: ''
+        },
         friends: [],
         faveGenre: ['opera', 'afrobeat', 'alt-rock'],
     };
@@ -55,7 +62,8 @@ describe.only('User Management Api', () => {
         password: 'fakePassword',
         spotify: {
             spotify_id: 'colssoccer12',
-            access_token: ''
+            access_token: '',
+            refresh_token: ''
         },
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
@@ -123,25 +131,28 @@ describe.only('User Management Api', () => {
     it('returns list of all users', () => {
         return saveUser(Ivy)
             .then(savedUser => {
-                Ivy = savedUser[0];
+                Ivy = savedUser;
             })
             .then(() => request.get('/users'))
             .then(res => res.body)
             .then(users => {
-                assert.equal(users.length, 3);
-                function test(fakeUser) {
+                assert.equal(users.length, 4);
+                function testUser(userInput) {
                     assert.include(users, {
-                        name: fakeUser.name,
-                        artist: fakeUser.artist,
-                        _id: fakeUser._id,
-                        spotifyId: fakeUser.spotifyId,
-                        genre: fakeUser.genre,
+                        name: userInput.name,
+                        email: userInput.email,
+                        _id: userInput._id,
+                        password: userInput.password,
+                        faveArtists: userInput.faveArtists,
+                        faveGenre: userInput.faveGenre,
+                        friends: userInput.friends,
+                        spotify: userInput.spotify
                     });
                 }
-
-                test(keeley);
-                test(mississippiStudios);
-                test(Ivy);
+                testUser(keeley);
+                testUser(mississippiStudios);
+                testUser(colssoccer12);
+                testUser(Ivy);
             });
     });
 
