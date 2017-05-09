@@ -26,7 +26,7 @@ describe('songs api', () => {
         spotifyId: '5DGJC3n9DS0Y9eY5ul9y05'
     };
     let fakeSong3 = {
-        title: 'List',
+        title: 'Lust',
         artist: 'Kenrick Lamar',
         spotifyId: '5DGJC3n9DS0Y9eY7ul9y0O'
     };
