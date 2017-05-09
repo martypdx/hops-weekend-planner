@@ -1,5 +1,5 @@
-const db = require('./_db');
-const request = require('./_request');
+const db = require('./util/_db');
+const request = require('./util/_request');
 const assert = require('chai').assert;
 
 describe('hops api', () => {
@@ -22,7 +22,6 @@ describe('hops api', () => {
         spotifyId: 'vertedinde',
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock']
-
     };
 
     let mississippiStudios = {
@@ -32,14 +31,6 @@ describe('hops api', () => {
         friends: [],
         faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
     };
-
-    // let warnerBros = {
-    //     name: 'warnerbro.records',
-    //     email: 'fakeUser3@fake.com',
-    //     password: 'fakePassword',
-    //     friends: [],
-    //     faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
-    // };
 
     function saveUser(user) {
         return request
