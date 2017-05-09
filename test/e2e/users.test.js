@@ -36,8 +36,18 @@ describe.only('User Management Api', () => {
         },
         password: 'fakePassword',
         friends: [],
-        faveGenre: ['acoustic', 'afrobeat', 'alt-rock'],
+        faveGenre: ['opera', 'afrobeat', 'alt-rock'],
     };
+
+
+    let Ivy = {
+        name: 'Ivy',
+        email: 'ivy@fake.com',
+        password: 'fakePassword',
+        friends: [],
+        faveGenre: ['opera', 'afrobeat', 'alt-rock'],
+    };
+
 
     let colssoccer12 = {
         name: 'Colin Hammond',
@@ -73,6 +83,17 @@ describe.only('User Management Api', () => {
             });
     });
 
+    it('GET returns 404 for non-existent id', () => {
+        const fakeId = '5201103b8896909da4402997';
+        return request.get(`/users/${fakeId}`)
+            .then(
+            () => { throw new Error('expected 404'); },
+            res => {
+                assert.equal(res.status, 404);
+            }
+            );
+    });
+
     it('saves a second user', () => {
         return saveUser(colssoccer12)
             .then(savedUser => {
@@ -96,6 +117,35 @@ describe.only('User Management Api', () => {
                         assert.deepEqual(user, keeley);
                     });
             });
+
     });
+
+    it('returns list of all users', () => {
+        return saveUser(Ivy)
+            .then(savedUser => {
+                Ivy = savedUser[0];
+            })
+            .then(() => request.get('/users'))
+            .then(res => res.body)
+            .then(users => {
+                assert.equal(users.length, 3);
+                function test(fakeUser) {
+                    assert.include(users, {
+                        name: fakeUser.name,
+                        artist: fakeUser.artist,
+                        _id: fakeUser._id,
+                        spotifyId: fakeUser.spotifyId,
+                        genre: fakeUser.genre,
+                    });
+                }
+
+                test(keeley);
+                test(mississippiStudios);
+                test(Ivy);
+            });
+    });
+
+
+
 
 });
