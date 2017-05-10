@@ -10,14 +10,47 @@
         white-space: nowrap;
         width: 500px;
       }
+      * {
+        font-family:  Tahoma, sans-serif;
+      }
+      body {
+        background-color: black;
+        color: yellow;
+      }
+      .btn {
+        background-color: yellow;
+        color: black;
+        border-radius: 50px;
+        width: 30vw;
+        height: 8vh;
+      }
+      input {
+        background-color: black;
+        border-radius: 50px;
+        width: 30vw;
+        height: 8vh;
+        text-align: center;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
     <div class="container">
         <h1>Welcome to HOPS: Music</h1>
         <p>Create a custom playlist based on your friends' tastes on Spotify</p>
-        <a href="/auth/signin" class="btn btn-primary">Log In</a>
-        <a href="/createuser.html" class="btn btn-primary">Create New Account</a>
+        <form method="post" action="/auth/signin" >
+            <input type="text" name="email" value="Email"><br>
+            <input type="text" name="password" value="Password"><br><br>
+            <input class="btn btn-primary" type="submit" value="Log In">
+        </form>
+        <a href="/signUpPage.html" class="btn btn-primary">Sign Up</a>
     </div>
   </body>
 </html>
