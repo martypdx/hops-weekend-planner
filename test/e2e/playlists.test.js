@@ -76,7 +76,7 @@ describe('playlists api', () => {
             .then(() => request.get('/playlists'))
             .then(res => res.body)
             .then(playlists => {
-                // assert.equal(playlists.length, 3);
+                assert.equal(playlists.length, 3);
                 function test(fakePlaylist) {
                     assert.include(playlists, {
                         title: fakePlaylist.title,
