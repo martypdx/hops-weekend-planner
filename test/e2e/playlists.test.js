@@ -17,18 +17,18 @@ describe('playlists api', () => {
 
     let fakePlaylist1 = {
         title: 'fake Playlist 1',
-        songs: [{ title: 'halo', artist: 'Beyonce' }, { title: 'Lame Song', artist: 'Train' }],
-        spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O'
+        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n9DS0Y9eY5ul8y0O' }, { title: 'Lame Song', artist: 'Train', spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O' }],
+        
     };
     let fakePlaylist2 = {
         title: 'fake Playlist 2',
-        songs: [{ title: 'halo', artist: 'Beyonce' }, { title: 'Lust', artist: 'Kendrick Lamar' }],
-        spotifyId: '5DGJC3n9DS0T9eY5ul9y0O'
+        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n7DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar',  spotifyId: '5DGJC3n9DS0T9eY5ul9y0O' }],
+       
     };
     let fakePlaylist3 = {
         title: 'fake Playlist 3',
-        songs: [{ title: 'Lame Song', artist: 'Train' }, { title: 'Lust', artist: 'Kendrick Lamar' }],
-        spotifyId: '5DGJC3n9DS0K9eY5ul9y0O'
+        songs: [{ title: 'Lame Song', artist: 'Train', spotifyId: '5DGJD3n9DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar',  spotifyId: '5DGJC3n9DS0K9eY5ul9y0O' }],
+       
     };
 
     function savePlaylist(playlist) {
