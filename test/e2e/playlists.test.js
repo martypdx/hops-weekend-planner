@@ -81,6 +81,7 @@ describe('playlists api', () => {
                     assert.include(playlists, {
                         title: fakePlaylist.title,
                         songs: fakePlaylist.songs,
+                        _id: fakePlaylist._id,
                     });
                 }
                 test(fakePlaylist1);
