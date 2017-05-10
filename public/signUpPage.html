@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hops Music Home Page</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style type="text/css">
+      .text-overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Welcome to HOPS: Music</h1>
+        <p>Create a custom playlist based on your friends' tastes on Spotify</p>
+        <form method="post" action="/auth/signup" >
+            Name:<br>
+            <input type="text" name="name" value="Mickey"><br>
+            Email:<br>
+            <input type="text" name="email" value="Mickey"><br>
+            Password:<br>
+            <input type="text" name="password" value="Mouse"><br><br>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    </div>
+  </body>
+</html>
