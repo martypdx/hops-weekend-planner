@@ -38,7 +38,7 @@ describe('playlists api', () => {
             .then(res => res.body);
     }
 
-    it.only('rountrips a new playlist', () => {
+    it('rountrips a new playlist', () => {
         return savePlaylist(fakePlaylist1)
             .then(savedPlaylist => {
                 assert.ok(savedPlaylist._id, 'saved has id');
@@ -76,11 +76,13 @@ describe('playlists api', () => {
             .then(() => request.get('/playlists'))
             .then(res => res.body)
             .then(playlists => {
+                console.log('PLAYLISTS', playlists);
                 assert.equal(playlists.length, 3);
                 function test(fakePlaylist) {
                     assert.include(playlists, {
                         title: fakePlaylist.title,
                         songs: fakePlaylist.songs,
+                        _id: fakePlaylist._id,
                     });
                 }
                 test(fakePlaylist1);
