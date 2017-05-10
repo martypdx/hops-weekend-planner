@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe('User Management Api', () => {
+describe.only('User Management Api', () => {
 
     before(db.drop);
 
@@ -47,7 +47,7 @@ describe('User Management Api', () => {
         email: 'ivy@fake.com',
         password: 'fakePassword',
         spotify: {
-            spotify_id: 'colssoccer12',
+            spotify_id: '126171140',
             access_token: '',
             refresh_token: ''
         },
@@ -201,6 +201,26 @@ describe('User Management Api', () => {
             () => { throw new Error('expected failure'); },
             () => { }
             );
+    });
+
+// SPOTIFY ROUTES 
+// SPOTIFY ROUTES 
+// SPOTIFY ROUTES 
+// SPOTIFY ROUTES 
+// SPOTIFY ROUTES 
+
+
+    it('/spotify/:id/friends returns songs by a user friends ', () => {
+        //will change based on the actual powerUsers we select
+        // const keeleyFriends = '59135c58ff28dd0011dfda9c';
+        let arrSongs = []; //will store the array of tracks
+        
+        return request // will be changed to make this req loop for length of power users array
+            .get(`/spotify/${keeley._id}/friends`)
+            .then(res => {
+                arrSongs = res.body; 
+                assert.ok(arrSongs.length > 0);
+            }); 
     });
 
 
