@@ -204,15 +204,8 @@ describe.only('User Management Api', () => {
     });
 
 // SPOTIFY ROUTES 
-// SPOTIFY ROUTES 
-// SPOTIFY ROUTES 
-// SPOTIFY ROUTES 
-// SPOTIFY ROUTES 
-
-
     it('/spotify/:id/friends returns songs by a user friends ', () => {
-        //will change based on the actual powerUsers we select
-        // const keeleyFriends = '59135c58ff28dd0011dfda9c';
+        const keeley = '59135c58ff28dd0011dfda9c';
         let arrSongs = []; //will store the array of tracks
         
         return request // will be changed to make this req loop for length of power users array
