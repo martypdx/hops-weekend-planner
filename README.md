@@ -39,7 +39,14 @@ https://support.spotify.com/us/account_payment_help/account_basics/create-your-s
   - Spotify API
   - Bootstrap
   - Chai/Chai-HTTP: Testing frameworks
+  - BCRYPT: hash passwords
 
+  DEVELOPERS:
+- Chris Wallace: Backend Dev
+- Keeley Hammond: Backend Dev
+- Ivy Patton: Backend Dev
+
+FOR DEVELOPMENT:
 SPOTIFY API:
 Below are sample GET urls, as well as the objects returned:
 
@@ -381,7 +388,4 @@ https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&s
 }
 ```
 
-DEVELOPERS:
-- Chris Wallace: Backend Dev
-- Keeley Hammond: Backend Dev
-- Ivy Patton: Backend Dev
+
