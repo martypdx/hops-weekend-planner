@@ -6,12 +6,34 @@ describe('User Management API', () => {
 
     before(db.drop);
 
-    it('initial /GET returns empty list', () => {
+    let token = '';
+
+    //create a token!
+    before(() => {
+        return request.post('/auth/signup')
+            .send({
+                name: 'Belinda',
+                email: 'keeley@thedrawplay.com',
+                password: 'banana',
+                spotify: {
+                    spotify_id: 'vertedinde',
+                    access_token: '',
+                    refresh_token: ''
+                }
+            })
+            .then(res => {
+                let responses = res.redirects[0].split('=');
+                token = responses[1];
+            });
+    });
+
+    it('initial /GET', () => {
         return request
             .get('/users')
+            .set('Authorization', token)
             .then(res => {
                 const users = res.body;
-                assert.deepEqual(users, []);
+                assert.ok(users);
             });
     });
 
@@ -73,6 +95,7 @@ describe('User Management API', () => {
         return request
             .post('/users')
             .send(user)
+            .set('Authorization', token)
             .then(res => res.body);
     }
 
@@ -83,7 +106,8 @@ describe('User Management API', () => {
                 keeley = savedUser;
             })
             .then(() => {
-                return request.get(`/users/${keeley._id}`);
+                return request.get(`/users/${keeley._id}`)
+                    .set('Authorization', token);
             })
             .then(res => res.body)
             .then(gotUser => {
@@ -109,6 +133,7 @@ describe('User Management API', () => {
             .then(() => {
                 return request.put(`/users/${keeley._id}`)
                     .send(keeley)
+                    .set('Authorization', token)
                     .then(res => res.body)
                     .then(user => {
                         assert.deepEqual(user, keeley);
@@ -122,10 +147,13 @@ describe('User Management API', () => {
             .then(savedUser => {
                 Ivy = savedUser;
             })
-            .then(() => request.get('/users'))
+            .then(() => {
+                return request.get('/users')
+                    .set('Authorization', token);
+            })
             .then(res => res.body)
             .then(users => {
-                assert.equal(users.length, 4);
+                assert.equal(users.length, 5);
             });
     });
 
@@ -133,6 +161,7 @@ describe('User Management API', () => {
         keeley.name = 'Oprah';
         return request.put(`/users/${keeley._id}`)
             .send(keeley)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(updated => {
                 assert.equal(updated.name, 'Oprah');
@@ -141,19 +170,16 @@ describe('User Management API', () => {
 
     it('deletes a user', () => {
         return request.delete(`/users/${keeley._id}`)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(result => {
                 assert.isTrue(result.removed);
-            })
-            .then(() => request.get('/users'))
-            .then(res => res.body)
-            .then(songs => {
-                assert.equal(songs.length, 3);
             });
     });
 
     it('deletes a non-existent user, returns removed false', () => {
         return request.delete(`/users/${keeley._id}`)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(result => {
                 assert.isFalse(result.removed);

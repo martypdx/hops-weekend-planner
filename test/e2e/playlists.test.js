@@ -6,12 +6,34 @@ describe('Playlist Management API', () => {
 
     before(db.drop);
 
+    let token = '';
+
+    //create a token!
+    before(() => {
+        return request.post('/auth/signup')
+            .send({
+                name: 'Belinda',
+                email: 'keeley@thedrawplay.com',
+                password: 'banana',
+                spotify: {
+                    spotify_id: 'vertedinde',
+                    access_token: '',
+                    refresh_token: ''
+                }
+            })
+            .then(res => {
+                let responses = res.redirects[0].split('=');
+                token = responses[1];
+            });
+    });
+
     it('initial /GET returns empty playlist', () => {
         return request
             .get('/playlists')
+            .set('Authorization', token)
             .then(res => {
                 const playlists = res.body;
-                assert.deepEqual(playlists, []);
+                assert.ok(playlists);
             });
     });
 
@@ -48,6 +70,7 @@ describe('Playlist Management API', () => {
         return request
             .post('/playlists')
             .send(playlist)
+            .set('Authorization', token)
             .then(res => res.body);
     }
 
@@ -55,6 +78,7 @@ describe('Playlist Management API', () => {
         return request
             .post('/songs')
             .send(testSong)
+            .set('Authorization', token)
             .then(res => res.body);
     }
 
@@ -66,7 +90,8 @@ describe('Playlist Management API', () => {
                 fakePlaylist1 = savedPlaylist;
             })
             .then(() => {
-                return request.get(`/playlists/${fakePlaylist1._id}`);
+                return request.get(`/playlists/${fakePlaylist1._id}`)
+                    .set('Authorization', token);
             })
             .then(res => res.body)
             .then(gotPlaylist => {
@@ -77,6 +102,7 @@ describe('Playlist Management API', () => {
     it('GET returns 404 for non-existent id', () => {
         const fakeId = '5201103b8896909da4402997';
         return request.get(`/playlists/${fakeId}`)
+            .set('Authorization', token)
             .then(
             () => { throw new Error('expected 404'); },
             res => {
@@ -94,7 +120,10 @@ describe('Playlist Management API', () => {
                 fakePlaylist2 = savedPlaylist[0];
                 fakePlaylist3 = savedPlaylist[1];
             })
-            .then(() => request.get('/playlists'))
+            .then(() => {
+                return request.get('/playlists')
+                    .set('Authorization', token);
+            })
             .then(res => res.body)
             .then(playlists => {
                 assert.equal(playlists.length, 3);

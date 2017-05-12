@@ -6,12 +6,34 @@ describe('Song Management API', () => {
 
     before(db.drop);
 
+    let token = '';
+
+    //create a token!
+    before(() => {
+        return request.post('/auth/signup')
+            .send({
+                name: 'Belinda',
+                email: 'keeley@thedrawplay.com',
+                password: 'banana',
+                spotify: {
+                    spotify_id: 'vertedinde',
+                    access_token: '',
+                    refresh_token: ''
+                }
+            })
+            .then(res => {
+                let responses = res.redirects[0].split('=');
+                token = responses[1];
+            });
+    });
+
     it('initial /GET returns empty list', () => {
         return request
             .get('/songs')
+            .set('Authorization', token)
             .then(res => {
                 const songs = res.body;
-                assert.deepEqual(songs, []);
+                assert.ok(songs);
             });
     });
 
@@ -35,6 +57,7 @@ describe('Song Management API', () => {
         return request
             .post('/songs')
             .send(song)
+            .set('Authorization', token)
             .then(res => res.body);
     }
 
@@ -45,7 +68,8 @@ describe('Song Management API', () => {
                 fakeSong1 = savedSong;
             })
             .then(() => {
-                return request.get(`/songs/${fakeSong1._id}`);
+                return request.get(`/songs/${fakeSong1._id}`)
+                    .set('Authorization', token);
             })
             .then(res => res.body)
             .then(gotSong => {
@@ -62,7 +86,10 @@ describe('Song Management API', () => {
                 fakeSong2 = savedSong[0];
                 fakeSong3 = savedSong[1];
             })
-            .then(() => request.get('/songs'))
+            .then(() => {
+                return request.get('/songs')
+                    .set('Authorization', token);
+            })
             .then(res => res.body)
             .then(songs => {
                 assert.equal(songs.length, 3);
@@ -86,6 +113,7 @@ describe('Song Management API', () => {
         fakeSong3.title = 'updated fake song';
         return request.put(`/songs/${fakeSong3._id}`)
             .send(fakeSong3)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(updated => {
                 assert.equal(updated.title, 'updated fake song');
@@ -94,11 +122,15 @@ describe('Song Management API', () => {
 
     it('deletes a song', () => {
         return request.delete(`/songs/${fakeSong3._id}`)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(result => {
                 assert.isTrue(result.removed);
             })
-            .then(() => request.get('/songs'))
+            .then(() => {
+                return request.get('/songs')
+                    .set('Authorization', token);
+            })
             .then(res => res.body)
             .then(songs => {
                 assert.equal(songs.length, 2);
@@ -107,6 +139,7 @@ describe('Song Management API', () => {
 
     it('deletes a non-existent song, returns removed false', () => {
         return request.delete(`/songs/${fakeSong3._id}`)
+            .set('Authorization', token)
             .then(res => res.body)
             .then(result => {
                 assert.isFalse(result.removed);
