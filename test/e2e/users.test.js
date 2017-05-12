@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe.only('User Management Api', () => {
+describe('User Management API', () => {
 
     before(db.drop);
 
@@ -91,17 +91,6 @@ describe.only('User Management Api', () => {
             });
     });
 
-    it('GET returns 404 for non-existent id', () => {
-        const fakeId = '5201103b8896909da4402997';
-        return request.get(`/users/${fakeId}`)
-            .then(
-            () => { throw new Error('expected 404'); },
-            res => {
-                assert.equal(res.status, 404);
-            }
-            );
-    });
-
     it('saves a second user', () => {
         return saveUser(colssoccer12)
             .then(savedUser => {
@@ -137,22 +126,6 @@ describe.only('User Management Api', () => {
             .then(res => res.body)
             .then(users => {
                 assert.equal(users.length, 4);
-                function testUser(userInput) {
-                    assert.include(users, {
-                        name: userInput.name,
-                        email: userInput.email,
-                        _id: userInput._id,
-                        password: userInput.password,
-                        faveArtists: userInput.faveArtists,
-                        faveGenre: userInput.faveGenre,
-                        friends: userInput.friends,
-                        spotify: userInput.spotify
-                    });
-                }
-                testUser(keeley);
-                testUser(mississippiStudios);
-                testUser(colssoccer12);
-                testUser(Ivy);
             });
     });
 
@@ -163,14 +136,6 @@ describe.only('User Management Api', () => {
             .then(res => res.body)
             .then(updated => {
                 assert.equal(updated.name, 'Oprah');
-            });
-    });
-
-    it('User and Song object relationship', () => {
-        return request.patch(`/users/${keeley._id}`)
-            .then(res => res.body)
-            .then(result => {
-                assert.isTrue(result.removed);
             });
     });
 
@@ -202,19 +167,4 @@ describe.only('User Management Api', () => {
             () => { }
             );
     });
-
-// SPOTIFY ROUTES 
-    it('/spotify/:id/friends returns songs by a user friends ', () => {
-        const keeley = '59135c58ff28dd0011dfda9c';
-        let arrSongs = []; //will store the array of tracks
-        
-        return request // will be changed to make this req loop for length of power users array
-            .get(`/spotify/${keeley._id}/friends`)
-            .then(res => {
-                arrSongs = res.body; 
-                assert.ok(arrSongs.length > 0);
-            }); 
-    });
-
-
 });

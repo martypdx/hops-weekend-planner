@@ -10,14 +10,11 @@ describe('User Management (Authentication)', () => {
         name: 'Morgan',
         email: 'spotifytest@gmail.com',
         password: 'hunter2',
-        spotifyId: '',
-        friends: [],
-        faveGenre: []
     };
 
     let token = '';
 
-    describe('Sign Up', () => {
+    describe('Sign Up / ', () => {
 
         it('signup happy path', () => {
             return request.post('/auth/signup')

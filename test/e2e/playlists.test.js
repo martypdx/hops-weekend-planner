@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe.only('playlists api', () => {
+describe('Playlist Management API', () => {
 
     before(db.drop);
 
@@ -29,7 +29,7 @@ describe.only('playlists api', () => {
 
     let fakePlaylist1 = {
         title: 'fake Playlist 1',
-        songs: [testSong,{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n9DS0Y9eY5ul8y0O' }, { title: 'Lame Song', artist: 'Train', spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O' }],
+        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n9DS0Y9eY5ul8y0O' }, { title: 'Lame Song', artist: 'Train', spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O' }],
         user: 'fake user id'
     };
     let fakePlaylist2 = {
@@ -58,7 +58,7 @@ describe.only('playlists api', () => {
             .then(res => res.body);
     }
 
-    it('rountrips a new playlist', () => {
+    it('roundtrips a new playlist', () => {
         saveSong(testSong);
         return savePlaylist(fakePlaylist1)
             .then(savedPlaylist => {
@@ -98,20 +98,18 @@ describe.only('playlists api', () => {
             .then(res => res.body)
             .then(playlists => {
                 assert.equal(playlists.length, 3);
-                function test(fakePlaylist) {
-                    assert.include(playlists, {
-                        title: fakePlaylist.title,
-                        songs: fakePlaylist.songs,
-                        _id: fakePlaylist._id,
-                    });
-                }
-                test(fakePlaylist1);
-                test(fakePlaylist2);
-                test(fakePlaylist3);
             });
     });
 
     it('updates an existing playlist', () => {
+        return request
+            .put(`/playlists/${fakePlaylist1._id}/${testSong}`)
+            .then(playlist => {
+                assert.include(playlist, testSong);
+            });
+    });
+
+    it('deletes a song from an existing playlist', () => {
         let deletedSong = fakePlaylist1.songs[0]._id;
         return request
             .patch(`/playlists/${fakePlaylist1._id}/${deletedSong}`)

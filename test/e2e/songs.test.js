@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe('songs api', () => {
+describe('Song Management API', () => {
 
     before(db.drop);
 
@@ -38,7 +38,7 @@ describe('songs api', () => {
             .then(res => res.body);
     }
 
-    it('rountrips a new song', () => {
+    it('roundtrips a new song', () => {
         return saveSong(fakeSong1)
             .then(savedSong => {
                 assert.ok(savedSong._id, 'saved has id');
