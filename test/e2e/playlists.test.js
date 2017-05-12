@@ -2,7 +2,7 @@ const db = require('./util/_db');
 const request = require('./util/_request');
 const assert = require('chai').assert;
 
-describe('playlists api', () => {
+describe.only('playlists api', () => {
 
     before(db.drop);
 
@@ -15,21 +15,34 @@ describe('playlists api', () => {
             });
     });
 
+    let testSong = {
+        title: 'Real Love',
+        album: 'Masterpiece',
+        spotifyId: '3mUuD7ec0lWqwSZnTiQ58J',
+        _id: '5914d7c6183e9dd8803f7e8e',
+        genre: [],
+        recommendedFrom: {
+            id: '59135df1ff28dd0011dfda9e',
+            name: 'Ivy'
+        }
+    };
+
     let fakePlaylist1 = {
         title: 'fake Playlist 1',
-        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n9DS0Y9eY5ul8y0O' }, { title: 'Lame Song', artist: 'Train', spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O' }],
-        
+        songs: [testSong,{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n9DS0Y9eY5ul8y0O' }, { title: 'Lame Song', artist: 'Train', spotifyId: '5DGJC3n9DS0Y9eY5ul9y0O' }],
+        user: 'fake user id'
     };
     let fakePlaylist2 = {
         title: 'fake Playlist 2',
-        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n7DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar',  spotifyId: '5DGJC3n9DS0T9eY5ul9y0O' }],
-       
+        songs: [{ title: 'halo', artist: 'Beyonce', spotifyId: '5DGJC3n7DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar', spotifyId: '5DGJC3n9DS0T9eY5ul9y0O' }],
+        user: 'fake user id'
     };
     let fakePlaylist3 = {
         title: 'fake Playlist 3',
-        songs: [{ title: 'Lame Song', artist: 'Train', spotifyId: '5DGJD3n9DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar',  spotifyId: '5DGJC3n9DS0K9eY5ul9y0O' }],
-       
+        songs: [{ title: 'Lame Song', artist: 'Train', spotifyId: '5DGJD3n9DS0Y9eY5ul9y0O' }, { title: 'Lust', artist: 'Kendrick Lamar', spotifyId: '5DGJC3n9DS0K9eY5ul9y0O' }],
+        user: 'fake user id'
     };
+
 
     function savePlaylist(playlist) {
         return request
@@ -38,7 +51,15 @@ describe('playlists api', () => {
             .then(res => res.body);
     }
 
+    function saveSong(testSong) {
+        return request
+            .post('/songs')
+            .send(testSong)
+            .then(res => res.body);
+    }
+
     it('rountrips a new playlist', () => {
+        saveSong(testSong);
         return savePlaylist(fakePlaylist1)
             .then(savedPlaylist => {
                 assert.ok(savedPlaylist._id, 'saved has id');
@@ -89,4 +110,14 @@ describe('playlists api', () => {
                 test(fakePlaylist3);
             });
     });
+
+    it('updates an existing playlist', () => {
+        let deletedSong = fakePlaylist1.songs[0]._id;
+        return request
+            .patch(`/playlists/${fakePlaylist1._id}/${deletedSong}`)
+            .then(playlist => {
+                assert.include(playlist, deletedSong);
+            });
+    });
 });
+
