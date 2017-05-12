@@ -1,17 +1,46 @@
 # Hops: Music Community Database
 
-Hops Mission:
- - Build off
- - Models for users, songs, artists and playlist
- - 5 artists with 5 tracks each, with all data entered
- - 4 users with different user personas
- - Deployed to Heroku with TravisCI
+HOPS MISSION:
+ - Spotify values access and volume. Hops Music values community and curation.
+ - Hops Music provides users with custom playlists based on:
+        - their friends listening activity
+        - their own user preferences (favorite artists, genres, ect)
+ - Playlists are vetted by your own trusted community, not calculating marketers.
+ - Grow your music knowledge while fostering community.
 
- STRETCH GOALS:
- - Integrate Songkick or BandsInTown to add shows
+ HOPS 2.0: the future of HOPS Music:
+ - Integrate Songkick or BandsInTown to add local show information for favorited artists.
 
-### Sample Route Responses
+ GETTING STARTED:
+ - Create a Hops Music account at https://hops-music.herokuapp.com/
+ - Link to your Spotify account by following Spotify Login prompt.
+ - Login to your Hops account and add friends to follow.
+ - Add prefered artists to your "favorites" for more user-targeted playlists.
 
+ ```
+ If you don't have a Spotify account, you can download & create one here:
+https://support.spotify.com/us/account_payment_help/account_basics/create-your-spotify-account
+ ```
+
+ END TO END TESTS:
+ - We provided end to end tests for /playlists, /songs, /users, /spotify
+ - Users can save and update playlists.  
+ - Users can add and delete songs.
+ - Users can add friends.
+
+ DEPLOYMENT:
+ - Hops music is deployed live on Heroku.
+
+ BUILT WITH:
+  - JS
+  - Node.js
+  - Express Framwork
+  - MongoDB/Mongoose
+  - Spotify API
+  - Bootstrap
+  - Chai/Chai-HTTP: Testing frameworks
+
+SPOTIFY API:
 Below are sample GET urls, as well as the objects returned:
 
 /GET User:
@@ -351,3 +380,8 @@ https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&s
   } ]
 }
 ```
+
+DEVELOPERS:
+- Chris Wallace: Backend Dev
+- Keeley Hammond: Backend Dev
+- Ivy Patton: Backend Dev
