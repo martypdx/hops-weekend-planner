@@ -20,17 +20,9 @@ describe('User Management (Authentication)', () => {
             return request.post('/auth/signup')
                 .send(user)
                 .then(res => {
-                    token = res.body.token;
-                    assert.ok(token = res.body.token);
-                });
-        });
-
-        it.skip('signup and get Spotify token/id', () => {
-            return request.post('/auth/signup')
-                .send(user)
-                .then(res => {
-                    token = res.body.token;
-                    assert.ok(token = res.body.token);
+                    let responses = res.redirects[0].split('=');
+                    token = responses[1];
+                    assert.ok(token);
                 });
         });
 
@@ -41,7 +33,11 @@ describe('User Management (Authentication)', () => {
         it('signin happy path', () => {
             return request.post('/auth/signin')
                 .send(user)
-                .then(res => assert.ok(res.body.token));
+                .then(res => {
+                    let responses = res.redirects[0].split('=');
+                    token = responses[1];
+                    assert.ok(token);
+                });
         });
 
         it('token is valid', () => {
