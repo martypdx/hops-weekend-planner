@@ -3,8 +3,8 @@
 HOPS MISSION:
  - Spotify values access and volume. Hops Music values community and curation.
  - Hops Music provides users with custom playlists based on:
-        - their friends listening activity
-        - their own user preferences (favorite artists, genres, ect)
+        A. their friends listening activity
+        B. their own user preferences (favorite artists, genres, ect)
  - Playlists are vetted by your own trusted community, not calculating marketers.
  - Grow your music knowledge while fostering community.
 
