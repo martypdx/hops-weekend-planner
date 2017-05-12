@@ -1,8 +1,8 @@
 # Hops: Music Community Database
 
-MVP:
- - Log into Spotify using app
- - Models for users, songs, artists and (stretch) shows
+Hops Mission:
+ - Build off
+ - Models for users, songs, artists and playlist
  - 5 artists with 5 tracks each, with all data entered
  - 4 users with different user personas
  - Deployed to Heroku with TravisCI
