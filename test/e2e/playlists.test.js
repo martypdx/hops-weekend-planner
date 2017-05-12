@@ -100,22 +100,5 @@ describe('Playlist Management API', () => {
                 assert.equal(playlists.length, 3);
             });
     });
-
-    it('updates an existing playlist', () => {
-        return request
-            .put(`/playlists/${fakePlaylist1._id}/${testSong}`)
-            .then(playlist => {
-                assert.include(playlist, testSong);
-            });
-    });
-
-    it('deletes a song from an existing playlist', () => {
-        let deletedSong = fakePlaylist1.songs[0]._id;
-        return request
-            .patch(`/playlists/${fakePlaylist1._id}/${deletedSong}`)
-            .then(playlist => {
-                assert.include(playlist, deletedSong);
-            });
-    });
 });
 

@@ -53,17 +53,6 @@ describe('Song Management API', () => {
             });
     });
 
-    it('GET returns 404 for non-existent id', () => {
-        const fakeId = '5201103b8896909da4402997';
-        return request.get(`/songs/${fakeId}`)
-            .then(
-            () => { throw new Error('expected 404'); },
-            res => {
-                assert.equal(res.status, 404);
-            }
-            );
-    });
-
     it('returns list of all songs', () => {
         return Promise.all([
             saveSong(fakeSong2),
